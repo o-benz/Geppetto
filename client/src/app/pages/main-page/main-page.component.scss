@@ -3,7 +3,8 @@ $primary-color: #bababa;
 $secondary-color: #b3b3b3;
 $tertiary-color: #e1e1e1;
 $light-color: #eeeeee;
-$dark-color: #d3d3d3;
+$black: #d3d3d3;
+$black: #1b1b1b;
 $transition-time: 0.5s;
 
 body {
@@ -11,7 +12,7 @@ body {
   margin: 0;
   padding: 0;
   background: $light-color;
-  color: $dark-color;
+  color: $black;
 }
 
 @keyframes gradientAnimation {
@@ -26,14 +27,35 @@ body {
   }
 }
 
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: $light-color;
+  padding: 20px;
+  a {
+    text-decoration: none;
+    color: $black;
+  }
+}
+
 /* Home Section */
 .home {
-  position: relative; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
+  position: relative;
+  height: 100%;
   background: linear-gradient(45deg, $primary-color, $secondary-color);
   color: $light-color;
   background-size: 300% 300%;
@@ -50,21 +72,63 @@ body {
   z-index: 0;
 }
 
-.feature {
+.container {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.section {
+  color: $black;
+  background-color: $light-color;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.start {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   margin: 20px 0;
+  button {
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 80px;
+    animation: pulse 2s infinite;
+    font-weight: bold;
+    font-size: large;
+  }
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  color: $black;
+  text-align: center;
+  padding: 10px 0;
 }
 
 button {
   margin-top: 10px;
   padding: 10px 15px;
   border: none;
-  background-color: $dark-color;
+  background-color: $black;
   color: $light-color;
   cursor: pointer;
   transition: background-color $transition-time;
 
   &:hover {
-    background-color: lighten($dark-color, 10%);
+    background-color: lighten($black, 10%);
   }
 }
 

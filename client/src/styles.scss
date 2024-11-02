@@ -1,5 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 html {
-    background-color: #584ea8;
+    background-color: #b3b3b3;
 }
 
 html,
@@ -28,22 +39,10 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: #a88bc3;
+    background-color: #cbcbcb;
     border-radius: 15px;
 }
 
 body::-webkit-scrollbar-thumb:active {
-    background-color: #4d3f5a;
-}
-
-@keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    background-color: #808080;
 }
