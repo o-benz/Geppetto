@@ -1,64 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-// import { FileService } from '@app/services/file/file.service';
-// import { AwsBedrockService } from '@app/services/aws-bedrock/aws-bedrock.service';
+import { S3Service } from '@app/services/s3/s3.service';
+import { BedrockService } from '@app/services/bedrock/bedrock.service';
+import { FileService } from '@app/services/file/file.service';
 
 @Component({
   selector: 'app-feature',
-  standalone: true,
-  imports: [],
   templateUrl: './feature.component.html',
   styleUrls: ['./feature.component.scss']
 })
 export class FeatureComponent implements OnInit {
   file: File | null = null;
 
-  // constructor(private fileService: FileService, private awsBedrockService: AwsBedrockService) {}
+  constructor(private fileService: FileService, private s3Service: S3Service, private bedrockService: BedrockService) {}
 
   ngOnInit() {
-    // this.file = this.fileService.getFile();
-    // if (this.file) {
-    //   console.log('File retrieved from service:', this.file.name);
-    // } else {
-    //   console.log('No file found in service');
-    // }
+    this.file = this.fileService.getFile();
+  }
+
+  private uploadAndPrompt(prompt: string) {
+    if (this.file) {
+      this.s3Service.uploadFile(this.file).subscribe(
+        () => {
+          console.log('File uploaded successfully:', this.file?.name);
+          this.bedrockService.sendPrompt(prompt).subscribe(
+            response => console.log('Bedrock response:', response),
+            err => console.error('Error from Bedrock:', err)
+          );
+        },
+        err => console.error('Error uploading file:', err)
+      );
+    } else {
+      console.warn('No file selected');
+    }
   }
 
   generateSummary() {
-    // if (this.file) {
-    //   this.awsBedrockService.generateSummary(this.file).subscribe(
-    //     response => {
-    //       console.log('Summary:', response);
-    //     },
-    //     err => {
-    //       console.error('Error generating summary:', err);
-    //     }
-    //   );
-    // }
+    this.uploadAndPrompt('Generate a summary based on the file contents.');
   }
 
   extractKPI() {
-    // if (this.file) {
-    //   this.awsBedrockService.extractKPI(this.file).subscribe(
-    //     response => {
-    //       console.log('KPI:', response);
-    //     },
-    //     err => {
-    //       console.error('Error extracting KPI:', err);
-    //     }
-    //   );
-    // }
+    this.uploadAndPrompt('Extract key performance indicators from the file contents.');
   }
 
   analyzeData() {
-    // if (this.file) {
-    //   this.awsBedrockService.analyzeData(this.file).subscribe(
-    //     response => {
-    //       console.log('Analysis:', response);
-    //     },
-    //     err => {
-    //       console.error('Error analyzing data:', err);
-    //     }
-    //   );
-    // }
+    this.uploadAndPrompt('Analyze the data and provide insights.');
   }
 }
