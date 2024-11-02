@@ -83,6 +83,7 @@ header {
 }
 
 .section {
+  user-select: none;
   color: $black;
   background-color: $light-color;
   padding: 20px;
@@ -128,7 +129,7 @@ button {
   transition: background-color $transition-time;
 
   &:hover {
-    background-color: lighten($black, 10%);
+    background-color: lighten($black, 5%);
   }
 }
 

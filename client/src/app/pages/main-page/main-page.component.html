@@ -11,12 +11,13 @@
         <h1>Geppetto: AI Financial Analysis Dashboard</h1>
       </a>
     </header>
-    
+
     <div class="section">
       <h2>Unlock Insights with AI</h2>
       <p>Your go-to tool for summarizing financial states and extracting key performance indicators.</p>
       <div class="start">
-        <button (click)="startAnalysis()">Start Analysis</button>
+        <button (click)="triggerFileInput()">Start Analysis</button>
+        <input type="file" #fileInput accept=".pdf" (change)="onFileSelected($event)" style="display: none;" />
       </div>
     </div>
 

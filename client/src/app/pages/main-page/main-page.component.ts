@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,9 +10,23 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class MainPageComponent {
-  fileUploaded: boolean = false;
+  @ViewChild('fileInput') fileInput!: ElementRef;
 
-  startAnalysis() {
-    this.fileUploaded = true;
+  constructor(private router: Router) {}
+
+  triggerFileInput() {
+    this.fileInput.nativeElement.click();
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      if (file.type === 'application/pdf') {
+        this.router.navigate(['/feature', { fileName: file.name }]);
+      } else {
+        alert('Please upload a valid PDF file.');
+      }
+    }
   }
 }
