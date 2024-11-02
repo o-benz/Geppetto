@@ -32,12 +32,40 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
   background: linear-gradient(45deg, $primary-color, $secondary-color);
   color: $light-color;
   background-size: 300% 300%;
   background-repeat: no-repeat;
   animation: gradientAnimation 12s ease infinite;
+}
+
+.stars-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.feature {
+  margin: 20px 0;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  border: none;
+  background-color: $dark-color;
+  color: $light-color;
+  cursor: pointer;
+  transition: background-color $transition-time;
+
+  &:hover {
+    background-color: lighten($dark-color, 10%);
+  }
 }
 
 .stars-container {

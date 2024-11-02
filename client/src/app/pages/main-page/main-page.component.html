@@ -6,6 +6,28 @@
       <div id='stars3'></div>
     </div>
 
+    <header>
+      <h1>Financial Analysis Dashboard</h1>
+    </header>
+    
+    <h2>Unlock Insights with AI</h2>
+    <p>Your go-to tool for summarizing financial states and extracting key performance indicators.</p>
+    <button (click)="startAnalysis()">Start Analysis</button>
 
-    <div class="card-container">
+    <input type="file" (change)="onFileSelected($event)" *ngIf="fileUploaded" />
+    
+    <div *ngIf="fileUploaded">
+      <h2>Key Features</h2>
+      <div class="feature" *ngFor="let feature of features">
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+        <button (click)="feature.action()">{{ feature.buttonText }}</button>
+      </div>
+    </div>
+  
+    <h2>Data Visualization</h2>
+    <footer>
+      <p>&copy; 2024 Financial Analysis Tool. All rights reserved.</p>
+    </footer>
+  </section>
 </div>
