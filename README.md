@@ -1,54 +1,90 @@
-# Solution d'Assistance Financière avec IA Générative - Datathon 2024: FinSight AI ou Geppetto
+# Financial Analysis Tool using Generative AI: Geppetto
 
-## 1. Conception Générale
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Features](#features)
+3. [Tech Stack](#tech-stack)
+4. [Getting Started](#getting-started)
+   - [Prerequisites](#prerequisites)
+   - [Setup Instructions](#setup-instructions)
+5. [Architecture](#architecture)
+6. [Functionality](#functionality)
+7. [Usage](#usage)
+8. [Contributors](#contributors)
+9. [License](#license)
 
-Développement d'un assistant financier basé sur l'IA, conçu pour :
-   - Résumés automatiques de rapports financiers
-   - Analyse de sentiment sur sections spécifiques (ex : lettre aux actionnaires)
-   - Surveillance des indicateurs financiers pour détecter des anomalies
-   - Analyses prédictives pour les projections financières
-   - Visualisation des KPI extraits et autres analyses
-   - Comparaison multi-rapports (ex: entre années ou entreprises)
+## Project Overview
+Geppetto is an innovative application designed to assist financial analysts in automating the analysis of financial reports. Leveraging generative AI and AWS services, the tool provides features for summarizing financial statements and extracting key performance indicators (KPIs).
 
-## 2. Détails de la Solution
+## Features
+- **Automatic Report Summarization**: Generate concise summaries of financial reports.
+- **KPI Extraction**: Identify and visualize critical financial metrics.
+- **User-Friendly Interface**: Intuitive design for easy navigation.
+- **Data Visualization**: Present financial data through graphs and charts.
+- **Integration with AWS Services**: Utilize AWS Bedrock and S3 for data processing and storage.
 
-### Module 1 : Collecte et Intégration de Données
-   - **Sources de données** : Intégration de YahooFinance, MorningStar, FRED et des rapports annuels fournis.
-   - **Pipeline de Traitement de Données** : Utilisation d’AWS Lambda et Glue pour ETL et Amazon Athena pour interroger les données.
+## Tech Stack
+- **Frontend**: Angular, TypeScript, SCSS
+- **Backend**: Node.js, Express.js (or AWS Lambda)
+- **Database**: Amazon S3 (for data storage)
+- **AI Services**: Amazon Bedrock (with Claude 3.5 for generative AI capabilities)
+- **Deployment**: AWS Lambda (if applicable) or a suitable cloud service
 
-### Module 2 : NLP et Résumés avec IA Générative
-   - **Résumé** : Utilisation d’Amazon Bedrock pour générer des résumés concis.
-   - **Analyse de Sentiment** : Amazon Comprehend pour déterminer le ton (optimiste, neutre, pessimiste) des sections.
-   - **Personnalisation** : Ajustement des modèles via AWS Sagemaker pour un langage financier précis.
+## Getting Started
 
-### Module 3 : Surveillance des Tendances et Extraction des KPI
-   - **Détection de Tendances** : Analyse des tendances avec Amazon Forecast et détection d'anomalies via Sagemaker.
-   - **Extraction de KPI** : Extraction via Amazon Textract et Comprehend pour des indicateurs financiers précis.
+### Prerequisites
+To run this project, you will need:
+- Node.js and npm installed on your machine.
+- Access to an AWS account with permissions to use AWS Bedrock and S3.
+- Angular CLI installed globally:
+  ```bash
+  npm install -g @angular/cli
+  ```
 
-### Module 4 : Analyse Prédictive
-   - **Séries Temporelles** : Utilisation de Amazon Forecast et Sagemaker pour prédire les revenus, coûts, etc.
-   - **Scénarios Prédictifs** : Modèles personnalisés en Sagemaker pour différentes hypothèses de marché.
+### Setup Instructions
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/yourusername/financial-analysis-tool.git
+   cd financial-analysis-tool
+   ```
 
-### Module 5 : Visualisation et Rapports
-   - **Dashboard** : Création de tableaux de bord interactifs avec Amazon QuickSight.
-   - **Comparaisons Multi-Périodes** : Comparaison visuelle automatisée de données financières.
+2. **Set Up the Angular Client**:
+   ```bash
+   cd client
+   npm install
+   ng serve
+   ```
 
-## 3. Expérience Utilisateur (UX/UI)
+3. **Set Up the Backend**:
+   - If using Express.js:
+     ```bash
+     cd backend
+     npm install
+     node index.js
+     ```
 
-   - **Tableau de Bord Intuitif** : Conception d'une interface centrale intuitive et facile d'accès.
-   - **Navigation Simple** : Accès rapide aux fonctionnalités principales.
-   - **Personnalisation** : Permet de configurer les vues selon les indicateurs préférés.
+   - If using AWS Lambda, deploy your function through the AWS console and set up API Gateway.
 
-## 4. Optimisation de l'Environnement AWS
+4. **Configure AWS Credentials**:
+   - Ensure that your AWS credentials are correctly configured in your environment to allow the application to access AWS services.
 
-   - **Intégration AWS** : Cloud9 pour le développement, Lambda et Glue pour ETL, Sagemaker pour les modèles ML, Bedrock pour l’IA générative.
-   - **Ressources Efficaces** : Programmation des tâches de traitement pour les périodes creuses.
-   - **Scalabilité** : Configuration de l’auto-scaling pour gérer les charges de données.
+## Architecture
+The application follows a modular architecture with distinct separation between the client and backend services. The Angular frontend communicates with the backend API, which in turn interacts with AWS services for data processing and storage.
 
-## 5. Livrables et Échéances
+![Architecture Diagram](./docs/architecture.png) <!-- Replace with actual diagram -->
 
-   - **Code** : Répertoire GitHub à soumettre avant le 4 novembre.
-   - **Démo Vidéo** : Vidéo de 3 minutes à soumettre avant le 5 novembre.
-   - **Documentation Technique** : Diagramme et explication de l'architecture.
-   - **Présentation (Finalistes)** : Préparation pour le 8 novembre.
+## Functionality
+- **Frontend**: The user interface is developed in Angular and provides forms for uploading financial reports, viewing summaries, and visualizing KPIs.
+- **Backend**: The server processes requests from the Angular client, utilizes AWS Bedrock for generating report summaries, and retrieves data from S3 for analysis.
 
+## Usage
+1. Navigate to the Angular application in your browser (`http://localhost:4200`).
+2. Use the provided forms to upload financial reports.
+3. View the generated summaries and KPI visualizations on the dashboard.
+
+## Contributors
+- **Omar Benzekri** - [GitHub Profile](https://github.com/o-benz)
+- **[Other Contributors]** - [Other Contributor GitHub Profiles]
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
