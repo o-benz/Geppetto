@@ -1,18 +1,16 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { FileService } from '@app/services/file/file.service';
 
 @Component({
   selector: 'app-main-page',
-  standalone: true,
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss'],
-  imports: [CommonModule]
+  styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private fileService: FileService) {}
 
   triggerFileInput() {
     this.fileInput.nativeElement.click();
@@ -22,11 +20,9 @@ export class MainPageComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      if (file.type === 'application/pdf') {
-        this.router.navigate(['/feature', { fileName: file.name }]);
-      } else {
-        alert('Please upload a valid PDF file.');
-      }
+      console.log('File selected:', file.name);
+      this.fileService.setFile(file);
+      this.router.navigate(['/feature', file.name]);
     }
   }
 }
