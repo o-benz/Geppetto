@@ -1,4 +1,8 @@
 export const environment = {
     production: true,
-    serverUrl: 'myServerURL', // TODO: Add remote server URL
+    aws: {
+      accessKeyId: 'ASIA5HLSELP4XB7NHHCM',
+      secretAccessKey: 'OfzWsHSaQ7Gf5Qp/Cj3AiDLCK+5niYpdECV+VGRm',
+      region: 'us-west-2'
+    }
 };
