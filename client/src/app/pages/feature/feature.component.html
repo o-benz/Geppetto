@@ -13,12 +13,42 @@
       </header>
   
       <div class="section">
-        <h2>Features</h2>
+        <h2>{{ file?.name }}</h2>
         <p>.</p>
         <div class="start">
-          <button (click)="generateSummary()">Generate Summary</button>
-          <button (click)="extractKPI()">Extract KPI</button>
-          <button (click)="analyzeData()">Analyze Data</button>
+          <button type="button" class="btn" (click)="generateSummary()">
+            <strong>Generate Summary</strong>
+            <div id="container-stars">
+              <div id="stars"></div>
+            </div>
+          
+            <div id="glow">
+              <div class="circle"></div>
+              <div class="circle"></div>
+            </div>
+          </button>
+          <button type="button" class="btn" (click)="extractKPI()">
+            <strong>Extract KPI</strong>
+            <div id="container-stars">
+              <div id="stars"></div>
+            </div>
+          
+            <div id="glow">
+              <div class="circle"></div>
+              <div class="circle"></div>
+            </div>
+          </button>
+          <button type="button" class="btn" (click)="analyzeData()">
+            <strong>Analyze Data</strong>
+            <div id="container-stars">
+              <div id="stars"></div>
+            </div>
+          
+            <div id="glow">
+              <div class="circle"></div>
+              <div class="circle"></div>
+            </div>
+          </button>
         </div>
       </div>
   
