@@ -7,6 +7,6 @@ RUN pip install -r requirements.txt
 
 # Copy lambda_function.py
 COPY lambda_function.py ${LAMBDA_TASK_ROOT}
-
+COPY extract_info.py ${LAMBDA_TASK_ROOT}
 
 CMD ["lambda_function.lambda_handler"]
