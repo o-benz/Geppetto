@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { S3Service } from '@app/services/s3/s3.service';
 import { BedrockService } from '@app/services/bedrock/bedrock.service';
 import { FileService } from '@app/services/file/file.service';
+import { AnthropicService } from '@app/services/anthropic/anthropic.service';
 
 @Component({
   selector: 'app-feature',
@@ -11,7 +12,7 @@ import { FileService } from '@app/services/file/file.service';
 export class FeatureComponent implements OnInit {
   file: File | null = null;
 
-  constructor(private fileService: FileService, private s3Service: S3Service, private bedrockService: BedrockService) {}
+  constructor(private fileService: FileService, private s3Service: S3Service, private bedrockService: BedrockService, private anthropicService: AnthropicService) {}
 
   ngOnInit() {
     this.file = this.fileService.getFile();
@@ -32,6 +33,10 @@ export class FeatureComponent implements OnInit {
     } else {
       console.warn('No file selected');
     }
+  }
+
+  sendPrompt(prompt: string) {
+    this.anthropicService.sendPrompt(prompt);
   }
 
   generateSummary() {
