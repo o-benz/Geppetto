@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { S3Service } from '@app/services/s3/s3.service';
 import { BedrockService } from '@app/services/bedrock/bedrock.service';
 import { FileService } from '@app/services/file/file.service';
-import { AnthropicService } from '@app/services/anthropic/anthropic.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-feature',
@@ -16,7 +16,7 @@ export class FeatureComponent implements OnInit {
   files: File[] = [];
   file: File | null = null;
 
-  constructor(private fileService: FileService, private s3Service: S3Service, private bedrockService: BedrockService, private anthropicService: AnthropicService) {}
+  constructor(private fileService: FileService, private s3Service: S3Service, private bedrockService: BedrockService, private http: HttpClient) {}
 
   ngOnInit() {
     this.file = this.fileService.getFile();
@@ -43,7 +43,12 @@ export class FeatureComponent implements OnInit {
   }
 
   sendPrompt(prompt: string) {
-    this.anthropicService.sendPrompt(prompt);
+    this.http.post<{ result: string }>('/api/run-model', { prompt }).subscribe(
+      response => {
+        console.log('Model response:', response.result);
+      },
+      err => console.error('Error from model:', err)
+    );
   }
 
   generateSummary() {
