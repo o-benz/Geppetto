@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { S3Service } from '@app/services/s3/s3.service';
-import { BedrockService } from '@app/services/bedrock/bedrock.service';
+// import { BedrockService } from '@app/services/bedrock/bedrock.service';
 import { FileService } from '@app/services/file/file.service';
 import { HttpClient } from '@angular/common/http';
+import { Feature } from '@app/enums/Feature';
 
 @Component({
   selector: 'app-feature',
@@ -19,7 +20,7 @@ export class FeatureComponent implements OnInit {
   constructor(
     private fileService: FileService,
     private s3Service: S3Service,
-    private bedrockService: BedrockService,
+    // private bedrockService: BedrockService,
     private http: HttpClient
   ) {}
 
@@ -41,15 +42,17 @@ export class FeatureComponent implements OnInit {
     }
   }
 
-  private uploadAndPrompt(prompt: string) {
+  private uploadAndPrompt(type: Feature) {
     if (this.file) {
       this.s3Service.uploadFile(this.file).subscribe(
         () => {
           console.log('File uploaded successfully:', this.file?.name);
-          this.bedrockService.sendPrompt(prompt).subscribe(
-            response => console.log('Bedrock response:', response),
-            err => console.error('Error from Bedrock:', err)
-          );
+          // appel au script python rag.py
+
+          // this.bedrockService.sendPrompt(prompt).subscribe(
+          //   response => console.log('Bedrock response:', response),
+          //   err => console.error('Error from Bedrock:', err)
+          // );
         },
         err => console.error('Error uploading file:', err)
       );
@@ -68,10 +71,10 @@ export class FeatureComponent implements OnInit {
   }
 
   generateSummary() {
-    this.uploadAndPrompt('Generate a summary based on the file contents.');
+    this.uploadAndPrompt(Feature.Summarization);
   }
 
   analyzeData() {
-    this.uploadAndPrompt('Analyze the data and provide insights.');
+    this.uploadAndPrompt(Feature.DataGeneration);
   }
 }

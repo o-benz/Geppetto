@@ -6,13 +6,14 @@ import { AppComponent } from '@app/components/app/app.component';
 import { MainPageComponent } from '@app/pages/main-page/main-page.component';
 import { FeatureComponent } from '@app/pages/feature/feature.component';
 import { SummaryComponent } from '@app/pages/summary/summary.component';
+import { DashboardComponent } from '@app/pages/dashboard/dashboard.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: MainPageComponent },
     { path: 'feature/:fileName', component: FeatureComponent },
     { path: 'summary/:fileName', component: SummaryComponent },
-    { path: 'dashboard/:fileName', component: FeatureComponent },
+    { path: 'dashboard/:fileName', component: DashboardComponent },
     { path: '**', redirectTo: '/home' },
 ];
 
