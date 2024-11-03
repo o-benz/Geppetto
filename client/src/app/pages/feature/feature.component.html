@@ -11,6 +11,11 @@
           <h1>Geppetto: AI Financial Analysis Dashboard</h1>
         </a>
       </header>
+
+      <div class="section" *ngIf="companyInfo">
+        <h2 class="company">{{ companyInfo.name }} <img [src]="companyInfo.logo" alt="{{ companyInfo.name }} Logo" class="logo"/></h2>
+        <p>{{ companyInfo.description }}</p>
+      </div>
   
       <div class="section">
         <div class="title">
@@ -97,9 +102,23 @@
           </button>
           <input type="file" #fileInput accept=".pdf" (change)="onFileSelected($event)" style="display: none;" />
         </div>
+      </div>
+
+      <div class="section" *ngIf="file">
         <div class="start">
           <button type="button" class="btn" (click)="generateSummary()">
             <strong>Generate Summary</strong>
+            <div id="container-stars">
+              <div id="stars"></div>
+            </div>
+          
+            <div id="glow">
+              <div class="circle"></div>
+              <div class="circle"></div>
+            </div>
+          </button>
+          <button type="button" class="btn" (click)="analyzeSentiment()">
+            <strong>Sentiment Analysis</strong>
             <div id="container-stars">
               <div id="stars"></div>
             </div>

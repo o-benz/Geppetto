@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: space-around;
   gap: 50px;
+  margin: 0;
   .btn {
     width: 45%;
   }  
@@ -14,6 +15,14 @@
     color: #ffffff;
     text-shadow: 0 0 4px white;
   }
+}
+
+.company {
+  margin-bottom: 5px;
+}
+
+.logo {
+  width: 50px;
 }
 
 .Documents-btn {

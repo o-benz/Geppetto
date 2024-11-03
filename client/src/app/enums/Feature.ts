@@ -1,4 +1,5 @@
 export enum Feature {
     Summarization = '1',
-    DataGeneration = '2',
+    SentimentAnalysis = '2',
+    DataGeneration = '3',
 }

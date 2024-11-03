@@ -6,8 +6,20 @@ const port = 3000;
 app.use(express.json());
 
 app.post('/api/run-model', (req, res) => {
-  const prompt = req.body.prompt;
-  const command = `python ../scripts/rag.py "${prompt}"`;
+  const feature = req.body.feature;
+  const company = req.body.company;
+  const year = req.body.year;
+  const file = req.body.file;
+  let command;
+  if (feature === '1') {
+    command = `python ../scripts/script1.py "${company}" "${year}" "${file}"`;
+  } else if (feature === '2') {
+    command = `python ../scripts/script2.py "${company}" "${year}" "${file}"`;
+  } else if (feature === '3') {
+    command = `python ../scripts/script3.py "${company}" "${year}" "${file}"`;
+  } else {
+    return res.status(400).send('Invalid feature value');
+  }
 
   exec(command, (error, stdout, stderr) => {
     if (error) {
