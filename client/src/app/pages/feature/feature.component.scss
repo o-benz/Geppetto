@@ -1,11 +1,10 @@
 .start {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  gap: 40px;
-  margin: 20px 0;
+  justify-content: space-around;
+  gap: 50px;
   .btn {
-    width: 30%;
+    width: 45%;
   }  
   strong {
     z-index: 2;
@@ -81,11 +80,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 5px 10px;
+  background-color: black;
+  border-radius: 8px;
   h2 {
     flex: 1;
     text-align: left;
     margin: 0;
+    color: white;
   }
   .Documents-btn {
     margin-left: auto;

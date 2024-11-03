@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { S3Service } from '@app/services/s3/s3.service';
 import { BedrockService } from '@app/services/bedrock/bedrock.service';
@@ -13,15 +13,31 @@ import { HttpClient } from '@angular/common/http';
   imports: [CommonModule]
 })
 export class FeatureComponent implements OnInit {
-  files: File[] = [];
   file: File | null = null;
+  @ViewChild('fileInput') fileInput!: ElementRef;
 
-  constructor(private fileService: FileService, private s3Service: S3Service, private bedrockService: BedrockService, private http: HttpClient) {}
+  constructor(
+    private fileService: FileService,
+    private s3Service: S3Service,
+    private bedrockService: BedrockService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {
     this.file = this.fileService.getFile();
-    if (this.file) {
-      this.files.push(this.file);
+  }
+
+  changeFile() {
+    this.fileInput.nativeElement.click();
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      console.log('File selected:', file.name);
+      this.fileService.setFile(file);
+      this.file = file;
     }
   }
 
@@ -53,10 +69,6 @@ export class FeatureComponent implements OnInit {
 
   generateSummary() {
     this.uploadAndPrompt('Generate a summary based on the file contents.');
-  }
-
-  extractKPI() {
-    this.uploadAndPrompt('Extract key performance indicators from the file contents.');
   }
 
   analyzeData() {

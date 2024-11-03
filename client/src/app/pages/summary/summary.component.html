@@ -1,0 +1,68 @@
+<div class="stars-container">
+    <div id='stars'></div>
+    <div id='stars2'></div>
+    <div id='stars3'></div>
+</div>
+<div class="home">
+    <div class="container">
+    <header>
+        <a href="/home">
+            <h1>Geppetto: AI Financial Analysis Dashboard</h1>
+        </a>
+    </header>
+
+    <div class="content">
+        <div class="section">
+            <h2>AI Generated Summary</h2>
+            <div class="ai-text">
+                <div class="loading" *ngIf="isLoading">Loading...</div>
+                <div class="summary-content" *ngIf="!isLoading">
+                <!-- AI Generated Summary Content -->
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <h2>AI Generated Comparison</h2>
+            <div class="ai-text">
+                <div class="loading" *ngIf="isLoading">Loading...</div>
+                <div class="summary-content" *ngIf="!isLoading">
+                <!-- AI Generated Summary Content -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chatbot-section">
+        <h2>Ask Follow-up Questions to Geppetto</h2>
+        <div class="ai-text">
+            <div class="summary-content">
+            <!-- AI Generated Summary Content -->
+            </div>
+        </div>
+        <div class="chat-input">
+            <div class="messageBox">
+                <input required="" placeholder="Ask Geppetto a Question..." type="text" id="messageInput" />
+                <button id="sendButton">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
+                    <path
+                    fill="none"
+                    d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+                    ></path>
+                    <path
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    stroke-width="33.67"
+                    stroke="#6c6c6c"
+                    d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+                    ></path>
+                </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+    <p>&copy; 2024 Geppetto. All rights reserved.</p>
+    </footer>
+</div>
+</div>
