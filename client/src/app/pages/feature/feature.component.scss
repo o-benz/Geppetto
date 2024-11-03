@@ -1,220 +1,93 @@
-/* Global Styles */
-$primary-color: #bababa;
-$secondary-color: #b3b3b3;
-$tertiary-color: #e1e1e1;
-$light-color: #eeeeee;
-$black: #d3d3d3;
-$black: #1b1b1b;
-$transition-time: 0.3s;
-
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: $light-color;
-  color: $black;
-}
-
-@keyframes gradientAnimation {
-  0% {
-      background-position: 0% 50%;
-  }
-  50% {
-      background-position: 100% 50%;
-  }
-  100% {
-      background-position: 0% 50%;
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  border-radius: 8px;
-  background-color: $light-color;
-  padding: 20px;
-  a {
-    text-decoration: none;
-    color: $black;
-  }
-}
-
-/* Home Section */
-.home {
-  position: relative;
-  height: 100%;
-  background: linear-gradient(45deg, $primary-color, $secondary-color);
-  color: $light-color;
-  background-size: 300% 300%;
-  background-repeat: no-repeat;
-  animation: gradientAnimation 12s ease infinite;
-}
-
-.stars-container {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.container {
-  height: 100%;
-  width: 100%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.section {
-  user-select: none;
-  color: $black;
-  background-color: $light-color;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
 .start {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 20px;
+  gap: 40px;
   margin: 20px 0;
-  button {
-    display: block;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    white-space: nowrap;
-    text-align: center;
-    line-height: 80px;
-    animation: pulse 2s infinite;
-    font-weight: bold;
-    font-size: large;
+  .btn {
+    width: 30%;
+  }  
+  strong {
+    z-index: 2;
+    font-family: "Avalors Personal Use";
+    font-size: 1.6em;
+    letter-spacing: 5px;
+    color: #ffffff;
+    text-shadow: 0 0 4px white;
   }
 }
 
-footer {
+.Documents-btn {
   display: flex;
-  justify-content: center;
-  color: $black;
-  text-align: center;
-  padding: 10px 0;
-}
-
-button {
-  margin-top: 10px;
-  padding: 10px 15px;
+  align-items: center;
+  justify-content: flex-start;
+  width: fit-content;
+  height: 45px;
   border: none;
-  background-color: $black;
-  color: $light-color;
+  padding: 0px 15px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0);
+  gap: 10px;
   cursor: pointer;
-  transition: background-color $transition-time;
-
-  &:hover {
-    background-color: lighten($black, 5%);
-  }
+  transition: all 0.3s;
 }
-
-.stars-container {
+.folderContainer {
+  width: 40px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+.fileBack {
+  z-index: 1;
+  width: 80%;
+  height: auto;
+}
+.filePage {
+  width: 50%;
+  height: auto;
   position: absolute;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
+  z-index: 2;
+  transition: all 0.3s ease-out;
+}
+.fileFront {
+  width: 85%;
+  height: auto;
+  position: absolute;
+  z-index: 3;
+  opacity: 0.95;
+  transform-origin: bottom;
+  transition: all 0.3s ease-out;
+}
+.text {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.Documents-btn:hover .filePage {
+  transform: translateY(-5px);
+}
+.Documents-btn:active {
+  transform: scale(0.95);
+}
+.Documents-btn:hover .fileFront {
+  transform: rotateX(30deg);
 }
 
-// n is number of stars required
-@function multiple-box-shadow($n) {
-  $value: '#{random(2000)}px #{random(2000)}px #FFF';
-  @for $i from 2 through $n {
-    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF';
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  h2 {
+    flex: 1;
+    text-align: left;
+    margin: 0;
   }
-  @return unquote($value);
-}
-
-$shadows-small: multiple-box-shadow(700);
-$shadows-medium: multiple-box-shadow(200);
-$shadows-big: multiple-box-shadow(100);
-
-#stars {
-  width: 1px;
-  height: 1px;
-  background: transparent;
-  box-shadow: $shadows-small;
-  animation: animStar 50s linear infinite;
-
-  &:after {
-    content: " ";
-    position: absolute;
-    top: 2000px;
-    width: 1px;
-    height: 1px;
-    background: transparent;
-    box-shadow: $shadows-small;
-  }
-}
-
-#stars2 {
-  width: 2px;
-  height: 2px;
-  background: transparent;
-  box-shadow: $shadows-medium;
-  animation: animStar 100s linear infinite;
-
-  &:after {
-    content: " ";
-    position: absolute;
-    top: 2000px;
-    width: 2px;
-    height: 2px;
-    background: transparent;
-    box-shadow: $shadows-medium;
-  }
-}
-
-#stars3 {
-  width: 3px;
-  height: 3px;
-  background: transparent;
-  box-shadow: $shadows-big;
-  animation: animStar 150s linear infinite;
-
-  &:after {
-    content: " ";
-    position: absolute;
-    top: 2000px;
-    width: 3px;
-    height: 3px;
-    background: transparent;
-    box-shadow: $shadows-big;
-  }
-}
-
-@keyframes animStar {
-  from {
-    transform: translateY(0px);
-  }
-  to {
-    transform: translateY(-2000px);
+  .Documents-btn {
+    margin-left: auto;
   }
 }

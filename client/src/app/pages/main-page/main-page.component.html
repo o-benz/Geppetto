@@ -16,7 +16,17 @@
       <h2>Unlock Insights with AI</h2>
       <p>Your go-to tool for summarizing financial states and extracting key performance indicators.</p>
       <div class="start">
-        <button (click)="triggerFileInput()">Start Analysis</button>
+        <button type="button" class="btn" (click)="triggerFileInput()">
+          <strong>Start Analysis</strong>
+          <div id="container-stars">
+            <div id="stars"></div>
+          </div>
+        
+          <div id="glow">
+            <div class="circle"></div>
+            <div class="circle"></div>
+          </div>
+        </button>
         <input type="file" #fileInput accept=".pdf" (change)="onFileSelected($event)" style="display: none;" />
       </div>
     </div>
