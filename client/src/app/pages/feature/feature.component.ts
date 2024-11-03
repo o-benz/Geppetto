@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { S3Service } from '@app/services/s3/s3.service';
 import { BedrockService } from '@app/services/bedrock/bedrock.service';
 import { FileService } from '@app/services/file/file.service';
@@ -7,15 +8,21 @@ import { AnthropicService } from '@app/services/anthropic/anthropic.service';
 @Component({
   selector: 'app-feature',
   templateUrl: './feature.component.html',
-  styleUrls: ['./feature.component.scss']
+  styleUrls: ['./feature.component.scss'],
+  standalone: true,
+  imports: [CommonModule]
 })
 export class FeatureComponent implements OnInit {
+  files: File[] = [];
   file: File | null = null;
 
   constructor(private fileService: FileService, private s3Service: S3Service, private bedrockService: BedrockService, private anthropicService: AnthropicService) {}
 
   ngOnInit() {
     this.file = this.fileService.getFile();
+    if (this.file) {
+      this.files.push(this.file);
+    }
   }
 
   private uploadAndPrompt(prompt: string) {
