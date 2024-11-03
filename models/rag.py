@@ -36,7 +36,7 @@ def retrieve(query, kbId, numberOfResults=5):
     except Exception as e:
         print(f"Error during retrieval: {e}")
 
-query = "what is CN revenue in 2023"
+query = "give me all relative statistical information about this document: AltaGas_Q4 2023 Press Release and MD&A_0.pdf"
 response = retrieve(query, "CGZ8KWKHGQ", 5)
 retrievalResults = response['retrievalResults']
 #pp.pprint(retrievalResults)
@@ -151,3 +151,21 @@ qa = RetrievalQA.from_chain_type(
 print("test:\n")
 answer = qa.invoke(query)
 pp.pprint(answer)
+
+# PROMPT_TEMPLATE = """
+# Human: You are a financial advisor AI system, and provides comparison to betwen this summary and the data of other companies in the knowledge base by using fact based and statistical information when possible. 
+# Use the following pieces of information to provide a concise answer to the question enclosed in <summary> tags. 
+# If you don't know the answer, just say that you don't know, don't try to make up an answer.
+# <context>
+# {context}
+# </context>
+
+# <summary>
+# {summary}
+# </summary>
+
+# The response should be specific and use statistics or numbers when possible.
+
+# Assistant:"""
+# claude_prompt = PromptTemplate(template=PROMPT_TEMPLATE, 
+#                                input_variables=["context","summary"])
