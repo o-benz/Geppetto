@@ -12,9 +12,9 @@ app.post('/api/run-model', (req, res) => {
   const file = req.body.file;
   let command;
   if (feature === '1') {
-    command = `python ../scripts/script1.py "${company}" "${year}" "${file}"`;
+    command = `python ../scripts/summaryV2.py "${company}" "${year}" "${file}"`;
   } else if (feature === '2') {
-    command = `python ../scripts/script2.py "${company}" "${year}" "${file}"`;
+    command = `python ../scripts/analysesdesentiment.py "${company}" "${year}" "${file}"`;
   } else if (feature === '3') {
     command = `python ../scripts/script3.py "${company}" "${year}" "${file}"`;
   } else {

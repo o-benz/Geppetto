@@ -10,12 +10,13 @@ import { ResponseService } from '@app/services/response/response.service';
   imports: [CommonModule]
 })
 export class SummaryComponent implements OnInit {
-  responseData: string | null = null;
+  summary: string | null = null;
+  sentiment: string | null = null;
 
   constructor(private responseService: ResponseService) {}
 
   ngOnInit() {
-    this.responseData = this.responseService.getResponseData();
-    console.log('Summary response data:', this.responseData);
+    this.sentiment = this.responseService.getSentiment();
+    this.summary = this.responseService.getSummary();
   }
 }

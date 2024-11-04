@@ -4,13 +4,22 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ResponseService {
-  private responseData: string | null = null;
+  private summary: string | null = null;
+  private sentiment: string | null = null;
 
-  setResponseData(data: string) {
-    this.responseData = data;
+  setSummary(data: string) {
+    this.summary = data;
   }
 
-  getResponseData(): string | null {
-    return this.responseData;
+  getSummary(): string | null {
+    return this.summary;
+  }
+
+  setSentiment(data: string) {
+    this.sentiment = data;
+  }
+
+  getSentiment(): string | null {
+    return this.sentiment;
   }
 }

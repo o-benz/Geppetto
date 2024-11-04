@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { Feature } from '@app/enums/Feature';
 import { Router } from '@angular/router';
 import { ResponseService } from '@app/services/response/response.service';
+import { forkJoin } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-feature',
@@ -64,18 +66,25 @@ export class FeatureComponent implements OnInit {
           if (this.file?.name) {
             file = this.file?.name;
           }
-          this.http.post<{ result: string }>('/api/run-model', { feature, company, year, file }).subscribe(
-            response => {
-              console.log('Model response:', response.result);
-              this.responseService.setResponseData(response.result);
+  
+          const summaryRequest = this.http.post<{ result: string }>('/api/run-model', { feature: Feature.Summarization, company, year, file });
+          const sentimentRequest = this.http.post<{ result: string }>('/api/run-model', { feature: Feature.SentimentAnalysis, company, year, file });
+  
+          forkJoin([summaryRequest, sentimentRequest]).pipe(
+            catchError(err => {
+              console.error('Error from model:', err);
+              throw err;
+            })
+          ).subscribe(
+            ([summaryResponse, sentimentResponse]) => {
+              console.log('Summary response:', summaryResponse.result);
+              console.log('Sentiment response:', sentimentResponse.result);
+              this.responseService.setSummary(summaryResponse.result);
+              this.responseService.setSentiment(sentimentResponse.result);
+  
               const fileName = this.file?.name || '';
-              if (feature === Feature.Summarization) {
-                this.router.navigate(['/summary', fileName]);
-              } else if (feature === Feature.SentimentAnalysis) {
-                this.router.navigate(['/sentiment', fileName]);
-              }
-            },
-            err => console.error('Error from model:', err)
+              this.router.navigate(['/summary', fileName]);
+            }
           );
         },
         err => console.error('Error uploading file:', err)
@@ -125,9 +134,6 @@ export class FeatureComponent implements OnInit {
 
   generateSummary() {
     this.uploadAndPrompt(Feature.Summarization, this.company, this.year);
-  }
-
-  analyzeSentiment() {
     this.uploadAndPrompt(Feature.SentimentAnalysis, this.company, this.year);
   }
 
