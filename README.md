@@ -5,23 +5,22 @@
 ## Table of Contents
 1. [Project Overview](#project-overview)
 2. [Polyfinance's 2024 Datathon](#polyfinances-2024-datathon)
-3. [Features](#features)
+3. [Setup and Launch](#setup-and-launch)
+   - [Prerequisites](#prerequisites)
+   - [Setup Instructions](#setup-instructions)
+4. [Features](#features)
    - [Automatic Report Summarization](#automatic-report-summarization)
    - [Sentiment Analysis](#sentiment-analysis)
    - [Financial Indicator Monitoring](#financial-indicator-monitoring)
    - [Financial Trend Predictions](#financial-trend-predictions)
    - [KPI Extraction and Visualization](#kpi-extraction-and-visualization)
    - [Multi-Report Comparisons](#multi-report-comparisons)
-4. [User Interface](#user-interface)
-5. [Tech Stack](#tech-stack)
-6. [Getting Started](#getting-started)
-   - [Prerequisites](#prerequisites)
-   - [Setup Instructions](#setup-instructions)
+5. [User Interface](#user-interface)
+6. [Tech Stack](#tech-stack)
 7. [Architecture](#architecture)
-8. [Functionality](#functionality)
-9. [Usage](#usage)
-10. [Contributors](#contributors)
-11. [License](#license)
+8. [Usage](#usage)
+9. [Contributors](#contributors)
+10. [License](#license)
 
 ## Project Overview
 Geppetto is an advanced AI-driven application designed to empower financial analysts by automating key tasks, making the analysis of financial reports faster and more insightful. Developed as part of the 2024 Polyfinance Datathon, Geppetto leverages generative AI and the AWS ecosystem to provide cutting-edge tools like automatic summarization, sentiment analysis, and real-time financial monitoring. This tool offers seamless integration with AWS services, enabling analysts to extract KPIs, visualize data, and perform comprehensive trend predictions with just a few clicks.
@@ -29,95 +28,115 @@ Geppetto is an advanced AI-driven application designed to empower financial anal
 ## Polyfinance's 2024 Datathon
 The Polyfinance 2024 Datathon is a high-impact 48-hour challenge, sponsored by National Bank of Canada, focusing on innovation in financial analytics. Participants were tasked with developing a generative AI-powered tool to assist financial analysts in synthesizing and interpreting data more efficiently. Armed with AWS resources like Bedrock, Cloud9, and a wealth of financial data, the Geppetto team created a robust solution to provide real-time insights, facilitate informed decision-making, and increase the accessibility of complex financial analyses.
 
-## Features
-### Automatic Report Summarization
-Our solution uses generative AI to generate concise, accurate summaries of extensive financial reports. By analyzing annual reports and key company documents, Geppetto provides analysts with a time-saving overview of essential information, enabling them to focus on strategic insights without combing through extensive data.
-
-### Sentiment Analysis
-Geppetto includes sentiment analysis for textual sections like letters to shareholders and executive comments. This feature detects the tone of these segments—optimistic, pessimistic, or neutral—offering analysts a quick overview of company sentiment across periods or documents.
-
-### Financial Indicator Monitoring
-With built-in financial indicator tracking, Geppetto detects significant variations in revenue, expenses, and other key metrics over time. Our solution enables analysts to monitor trends and uncover unexpected deviations, facilitating a proactive approach to financial oversight.
-
-### Financial Trend Predictions
-Geppetto employs historical data to forecast future trends, providing analysts with predictions for revenue, costs, and profitability. This predictive analysis helps stakeholders anticipate potential market shifts and strategize accordingly.
-
-### KPI Extraction and Visualization
-By extracting KPIs, Geppetto delivers meaningful data visualizations to help analysts interpret core metrics efficiently. Using clear graphs and dashboards, Geppetto enhances the interpretability of critical financial indicators.
-
-### Multi-Report Comparisons
-Geppetto’s comparison tool allows analysts to view differences across multiple financial reports or time periods. This feature streamlines comparative analysis, highlighting shifts in performance metrics that may indicate growth opportunities or risks.
-
-## User Interface
-Geppetto’s interface was built with the end user in mind, ensuring that even complex analytical tools are accessible and intuitive. With a streamlined layout, users can navigate seamlessly through different functionalities such as report upload, KPI dashboard, and sentiment analysis. Each component was designed to minimize clicks and maximize information accessibility, making Geppetto an ideal tool for both seasoned analysts and newcomers.
-
-## Tech Stack
-- **Frontend**: Angular, TypeScript, HTML, SCSS
-- **Database**: Amazon S3 (for data storage)
-- **AI Services**: Amazon Bedrock (utilizing Claude 3.5 for generative AI)
-
-## Getting Started
+## Setup and Launch
 
 ### Prerequisites
 To run this project, you will need:
 - Python installed on your machine.
 - Node.js and npm installed on your machine.
-- Angular CLI installed globally:
-  ```bash
-  npm install -g @angular/cli
-  ```
+
 
 ### Setup Instructions
+
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/o-benz/Geppetto.git
    cd geppetto
    ```
-2. **Install the required requirements listed out**:
-   ```bash
-   pip install -r requirements.txt
-   ```
 
-3. **Set Up the Angular Client**:
+2. **Run the Automated Setup Script**:
+   - Simply run the provided setup script to automate the setup and launch process:
+     ```bash
+     python setup.py
+     ```
+   - This script will handle dependencies, credentials, and initial setup. If it encounters any issues, continue with the manual steps below.
+
+3. **Manual Setup (if the script fails)**:
+   - **AWS Credentials Setup**: Copy the `credentials` file from the repository root to `C:\Users\user\.aws\` (replace `user` with your Windows username).
+   - **Install Required Python Packages**:
+     ```bash
+     pip install -r requirements.txt
+     ```
+
+4. **Angular Client Setup**:
    ```bash
    cd client
    npm ci
    ```
-4. **Set up the NodeJS**:
+
+5. **NodeJS Server Setup**:
    ```bash
    cd server
    npm ci
    ```
 
-### Starting the website locally
+
+### Starting the Website Locally
 1. **Start the Angular Client**:
    ```bash
    cd client
    npm start
    ```
-2. **Start the the NodeJS Server in a seperate terminal**:
+2. **Start the NodeJS Server in a separate terminal**:
    ```bash
    cd server
-   npm start
+   node index.js
    ```
-3. **Access the Angular application in your browser at `http://localhost:4200`.**
+3. **Access the Angular application in your browser at** `http://localhost:4200`.
+
+---
+
+## Features
+### Automatic Report Summarization
+Geppetto uses generative AI to generate concise, accurate summaries of extensive financial reports. This feature quickly extracts essential insights, allowing analysts to gain an overview without reading through lengthy data.
+
+### Sentiment Analysis
+Geppetto’s sentiment analysis capability interprets sections of the report, such as executive comments, to detect tones like optimism or caution. This feature gives analysts a summary of company sentiment, helpful for understanding the broader mood conveyed in reports.
+
+### Chatbot Assistance
+Geppetto includes an AI-powered chatbot, enabling users to ask follow-up questions about the analyzed report. The chatbot uses advanced prompt engineering and a specialized retrieval-augmented generation (RAG) model to provide accurate, context-specific answers, making it easier for analysts to dive deeper into specific insights or clarify details on demand.
+
+### KPI Extraction and Visualization
+Geppetto extracts core KPIs and presents them through visually appealing, interactive charts. Users can export individual visuals as PNGs or download an entire report as a PDF or CSV.
+
+
+## User Interface
+Geppetto’s user-friendly, interactive interface makes navigating between various tools straightforward. The interface includes a:
+- **Home Page**: "Start Analyzing" button leading to report upload.
+![Home Page](/doc/assets/home.png)
+- **Features Page**: Displays the uploaded report’s company info, logo, and basic details.
+![Features Page](/doc/assets/feature.png)
+- **Summary & Sentiment Analysis Page + ChatBot**: Provides an AI-generated summary and sentiment overview.
+![AI Analysis](/doc/assets/ai_analysis.png)
+![AI ChatBot](/doc/assets/chatbot.png)
+- **Data Analysis Page**: Includes key KPIs, five interactive charts, and AI-generated insights.
+![Dashboard 1](/doc/assets/dashboard-1.png)
+![Dashboard 2](/doc/assets/dashboard-2.png)
+
+Each feature is designed with accessibility in mind, making complex data easy to navigate and understand.
+
+## Tech Stack
+- **Frontend**: Angular (TypeScript), HTML, SCSS, and a responsive design framework for optimized user interaction.
+- **Backend**: NodeJS, responsible for handling HTTP requests and serving as the link between the Angular client and AWS.
+- **AWS Services**: Amazon Bedrock for generative AI, Amazon S3 for secure storage, and integrated API calls to process and retrieve data.
+- **Backend Processing**: Python scripts communicate with the AWS API to load files into S3, synchronize data with our knowledge base, and perform prompt engineering to generate high-quality responses.
+
+Our application is designed with advanced prompt engineering techniques to optimize responses and ensure analysts receive accurate, contextually relevant insights.
 
 ## Architecture
-Geppetto follows a modular, scalable architecture that optimally separates concerns. The Angular frontend interacts with the NodeJS backend through HTTP, the backend then calls python scripts that utilize the AWS services. Data is stored in Amazon S3, while generative AI processing is handled by Amazon Bedrock, which provides high-performance natural language processing to interpret, summarize, and predict data.
+Geppetto’s architecture is modular and scalable, consisting of:
+1. **Angular Frontend** that communicates via HTTP with:
+2. **NodeJS Backend**, which interacts with Python scripts.
+3. **AWS Integration**: Python scripts utilize AWS services, including Amazon S3 for storage and Bedrock for AI-powered processing. 
 
-![Architecture Diagram](./docs/architecture.png)
+![Architecture Diagram](./doc/assets/architecture.png)
 
 ## Functionality
-Geppetto’s interface provides:
-- **Upload Capabilities** for users to input financial reports.
-- **Automated Summarization** and **Sentiment Analysis** for fast, AI-driven insights.
-- **Finance ChatBot** that allows users to directly communicate with our RAG for follow-up questions on what it generated.
-- **Dashboard Displays** for KPI visualizations, with clear graphical representations.
-
-## Usage
-1. Access the Angular application in your browser at `http://localhost:4200`.
-2. Upload financial documents through the report upload form.
-3. Use the KPI dashboard to view generated summaries, sentiment insights, and visualized data.
+Geppetto provides a suite of functionalities:
+- **Upload Financial Reports** and analyze them in real-time.
+- **Generate Summaries and Sentiment Analysis** with generative AI.
+- **Access a Finance ChatBot** for follow-up questions.
+- **Display Financial Indicators and KPIs** through visually intuitive, exportable charts.
 
 ## Contributors
 - **Omar Benzekri** - [o-benz](https://github.com/o-benz)

@@ -195,4 +195,30 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       console.error(`Failed to find canvas with id ${visual}`);
     }
   }
+
+  exportToCSV() {
+    const data = [
+      ['Date', 'Stock Prices', 'Revenue', 'Expenses', 'Investments', 'Performance'],
+      ...this.fileContent.dates.map((date: any, index: string | number) => [
+        date,
+        this.fileContent.stockPrices[index],
+        this.fileContent.revenue[index],
+        this.fileContent.expenses[index],
+        this.fileContent.investments[index],
+        this.fileContent.performance[index]
+      ])
+    ];
+  
+    const csvContent = data.map(e => e.join(",")).join("\n");
+  
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", "dashboard_data.csv");
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 }

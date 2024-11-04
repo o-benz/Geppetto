@@ -1,3 +1,11 @@
+header {
+    background-color: rgba(255, 255, 255, 0.388);
+}
+
+.section {
+    background-color: rgba(255, 255, 255, 0.388);
+}
+
 .visual-container {
     display: flex;
     align-items: center;
@@ -99,4 +107,9 @@
 
 .pushable:focus:not(:focus-visible) {
     outline: none;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-around;
 }

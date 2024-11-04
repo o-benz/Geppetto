@@ -134,6 +134,9 @@ export class FeatureComponent implements OnInit {
 
   analyzeData() {
     const fileName = this.file?.name || '';
-    this.router.navigate(['/dashboard', fileName]);
+    this.loading = true;
+    setTimeout(() => {
+      this.router.navigate(['/dashboard', fileName]);
+    }, 4000);
   }
 }

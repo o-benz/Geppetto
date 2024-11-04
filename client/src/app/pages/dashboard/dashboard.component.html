@@ -4,7 +4,6 @@
     <div id='stars3'></div>
 </div>
 <div class="home">
-    <div class="container">
     <header>
         <a href="/home">
             <h1>Geppetto: AI Financial Analysis Dashboard</h1>
@@ -70,15 +69,22 @@
     </div>
 
     <div class="section">
-        <button class="pushable" (click)="exportToPDF()">
-            <span class="shadow"></span>
-            <span class="edge"></span>
-            <span class="front">Export to PDF</span>
-        </button>
+        <div class="actions">
+            <button class="pushable" (click)="exportToPDF()">
+                <span class="shadow"></span>
+                <span class="edge"></span>
+                <span class="front">Export to PDF</span>
+            </button>
+            
+            <button class="pushable" (click)="exportToCSV()">
+                <span class="shadow"></span>
+                <span class="edge"></span>
+                <span class="front">Export to CSV</span>
+            </button>
+        </div>
     </div>
 
     <footer>
         <p>&copy; 2024 Geppetto. All rights reserved.</p>
     </footer>
-    </div>
 </div>

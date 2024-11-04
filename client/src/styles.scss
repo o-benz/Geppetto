@@ -98,8 +98,13 @@ header {
 
 /* Home Section */
 .home {
-  position: relative;
+  gap: 20px;
   height: 100%;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .stars-container {
@@ -109,16 +114,6 @@ header {
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
-}
-
-.container {
-  height: 100%;
-  width: 100%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 20px;
 }
 
 .section {
