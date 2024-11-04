@@ -52,17 +52,16 @@ Geppetto’s comparison tool allows analysts to view differences across multiple
 Geppetto’s interface was built with the end user in mind, ensuring that even complex analytical tools are accessible and intuitive. With a streamlined layout, users can navigate seamlessly through different functionalities such as report upload, KPI dashboard, and sentiment analysis. Each component was designed to minimize clicks and maximize information accessibility, making Geppetto an ideal tool for both seasoned analysts and newcomers.
 
 ## Tech Stack
-- **Frontend**: Angular, TypeScript, SCSS
+- **Frontend**: Angular, TypeScript, HTML, SCSS
 - **Database**: Amazon S3 (for data storage)
 - **AI Services**: Amazon Bedrock (utilizing Claude 3.5 for generative AI)
-- **Deployment**: AWS Lambda and/or similar AWS services for cloud scalability and efficiency
 
 ## Getting Started
 
 ### Prerequisites
 To run this project, you will need:
+- Python installed on your machine.
 - Node.js and npm installed on your machine.
-- Access to an AWS account with permissions for AWS Bedrock, S3, and other relevant services.
 - Angular CLI installed globally:
   ```bash
   npm install -g @angular/cli
@@ -71,31 +70,49 @@ To run this project, you will need:
 ### Setup Instructions
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/o-benz/geppetto.git
+   git clone https://github.com/o-benz/Geppetto.git
    cd geppetto
    ```
-
-2. **Set Up the Angular Client**:
+2. **Install the required requirements listed out**:
    ```bash
-   cd client
-   npm install
-   ng serve
+   pip install -r requirements.txt
    ```
 
-3. **Configure AWS Credentials**:
-   Ensure your AWS credentials are correctly configured in the `environment.prod.ts` file, allowing the application to interact with AWS services securely.
+3. **Set Up the Angular Client**:
+   ```bash
+   cd client
+   npm ci
+   ```
+4. **Set up the NodeJS**:
+   ```bash
+   cd server
+   npm ci
+   ```
+
+### Starting the website locally
+1. **Start the Angular Client**:
+   ```bash
+   cd client
+   npm start
+   ```
+2. **Start the the NodeJS Server in a seperate terminal**:
+   ```bash
+   cd server
+   npm start
+   ```
+3. **Access the Angular application in your browser at `http://localhost:4200`.**
 
 ## Architecture
-Geppetto follows a modular, scalable architecture that optimally separates concerns. The Angular frontend interacts with backend AWS services via a structured API layer. Data is stored in Amazon S3, while generative AI processing is handled by Amazon Bedrock, which provides high-performance natural language processing to interpret, summarize, and predict data. The architecture leverages AWS Lambda for serverless deployment, ensuring minimal latency and optimal scalability.
+Geppetto follows a modular, scalable architecture that optimally separates concerns. The Angular frontend interacts with the NodeJS backend through HTTP, the backend then calls python scripts that utilize the AWS services. Data is stored in Amazon S3, while generative AI processing is handled by Amazon Bedrock, which provides high-performance natural language processing to interpret, summarize, and predict data.
 
-![Architecture Diagram](./docs/architecture.png) <!-- Replace with actual diagram -->
+![Architecture Diagram](./docs/architecture.png)
 
 ## Functionality
 Geppetto’s interface provides:
 - **Upload Capabilities** for users to input financial reports.
 - **Automated Summarization** and **Sentiment Analysis** for fast, AI-driven insights.
+- **Finance ChatBot** that allows users to directly communicate with our RAG for follow-up questions on what it generated.
 - **Dashboard Displays** for KPI visualizations, with clear graphical representations.
-- **Trend and Forecasting Tools** to analyze past performance and predict future results.
 
 ## Usage
 1. Access the Angular application in your browser at `http://localhost:4200`.
