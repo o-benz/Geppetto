@@ -35,7 +35,6 @@ if __name__ == '__main__':
     retriver_query = "give me all relative sentimental information about this document: " + COmp
     response = retrieve(retriver_query, "CGZ8KWKHGQ", 10)
     retrievalResults = response['retrievalResults']
-    #pp.pprint(retrievalResults)
 
     #####################################
     def get_contexts(retrievalResults):
@@ -45,7 +44,6 @@ if __name__ == '__main__':
         return contexts
 
     contexts = get_contexts(retrievalResults)
-    #pp.pprint(contexts)
 
     #####################################
     prompt = f"""
@@ -89,8 +87,6 @@ if __name__ == '__main__':
     response_body = json.loads(response.get('body').read())
     response_text = response_body.get('outputs')[0]['text']
 
-
-    # pp.pprint(response_text)
     ########################################
     from langchain_aws import ChatBedrock
     from langchain_community.retrievers import AmazonKnowledgeBasesRetriever  # Updated import
@@ -98,7 +94,7 @@ if __name__ == '__main__':
     llm = ChatBedrock(model_id="anthropic.claude-3-haiku-20240307-v1:0",
                 client = bedrock_client)
   
-    generator_query = "donne moi les 4 grande emotions qui resortent du rapport : AltaGas_Q4 2023 Press Release and MD&A_0.pdf"
+    generator_query = "Give me the main sentiments qbout this company : "+ COmp
     retriever = AmazonKnowledgeBasesRetriever(
         knowledge_base_id="CGZ8KWKHGQ",
         retrieval_config={
@@ -112,10 +108,6 @@ if __name__ == '__main__':
         session=session,
         region_name="us-west-2",
     )
-    # docs = retriever.get_relevant_documents(
-    #         query=generator_query
-    #     )
-    #pp.pprint(docs)
 
     ######################################
     from langchain.prompts import PromptTemplate
