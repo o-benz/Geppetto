@@ -14,7 +14,7 @@ session = boto3.Session(
     profile_name="my_profile"
 
 )
-kb_id = 'CGZ8KWKHGQ'
+kb_id = 'YDZ1OKMWRZ'
 region = "us-west-2"
 bedrock_config = Config(connect_timeout=120, read_timeout=120, retries={'max_attempts': 0})
 bedrock_client = session.client('bedrock-runtime', region_name = region)
@@ -22,7 +22,7 @@ bedrock_agent_client = session.client("bedrock-agent-runtime",
                               config=bedrock_config, region_name = region)
 print(bedrock_client)
 
-def retrieve(query, kbId, numberOfResults=10):
+def retrieve(query, kbId, numberOfResults=5):
     try:
         return bedrock_agent_client.retrieve(
             retrievalQuery={'text': query},
@@ -36,8 +36,8 @@ def retrieve(query, kbId, numberOfResults=10):
     except Exception as e:
         print(f"Error during retrieval: {e}")
 
-retriver_query = "give me all relative statistical information about this document: AltaGas_Q4 2023 Press Release and MD&A_0.pdf"
-response = retrieve(retriver_query, "CGZ8KWKHGQ", 10)
+query = "what is CN revenue in 2023"
+response = retrieve(query, "CGZ8KWKHGQ", 5)
 retrievalResults = response['retrievalResults']
 #pp.pprint(retrievalResults)
 
@@ -49,7 +49,7 @@ def get_contexts(retrievalResults):
     return contexts
 
 contexts = get_contexts(retrievalResults)
-pp.pprint(contexts)
+#pp.pprint(contexts)
 
 #####################################
 prompt = f"""
@@ -61,7 +61,7 @@ If you don't know the answer, just say that you don't know, don't try to make up
 </context>
 
 <question>
-{retriver_query}
+{query}
 </question>
 
 The response should be specific and use statistics or numbers when possible.
@@ -91,14 +91,14 @@ response_body = json.loads(response.get('body').read())
 response_text = response_body.get('outputs')[0]['text']
 
 
-# pp.pprint(response_text)
+#pp.pprint(response_text)
 ########################################
 from langchain_aws import ChatBedrock
 from langchain_community.retrievers import AmazonKnowledgeBasesRetriever  # Updated import
 
 llm = ChatBedrock(model_id="anthropic.claude-3-haiku-20240307-v1:0",
               client = bedrock_client)
-generator_query = "donne moi le resume du rapport de ce rapport : AltaGas_Q4 2023 Press Release and MD&A_0.pdf"
+query = "donne mois le Produits d’exploitation de CN   en  2023 et  2022 et compare les deux et dit mois quelle est la meilleurs années selon d'autre informations et cite les informations "
 retriever = AmazonKnowledgeBasesRetriever(
     knowledge_base_id="CGZ8KWKHGQ",
     retrieval_config={
@@ -113,59 +113,41 @@ retriever = AmazonKnowledgeBasesRetriever(
     region_name="us-west-2",
 )
 docs = retriever.get_relevant_documents(
-        query=generator_query
+        query=query
     )
 #pp.pprint(docs)
 
 ######################################
-# from langchain.prompts import PromptTemplate
+from langchain.prompts import PromptTemplate
 
-# PROMPT_TEMPLATE = """
-# Human: You are a financial advisor AI system, and provides answers to questions by using fact based and statistical information when possible. 
-# Use the following pieces of information to provide a concise answer to the question enclosed in <question> tags. 
-# If you don't know the answer, just say that you don't know, don't try to make up an answer.
-# <context>
-# {context}
-# </context>
+PROMPT_TEMPLATE = """
+Human: You are a financial advisor AI system, and provides answers to questions by using fact based and statistical information when possible. 
+Use the following pieces of information to provide a concise answer to the question enclosed in <question> tags. 
+If you don't know the answer, just say that you don't know, don't try to make up an answer.
+<context>
+{context}
+</context>
 
-# <question>
-# {question}
-# </question>
+<question>
+{question}
+</question>
 
-# The response should be specific and use statistics or numbers when possible.
+The response should be specific and use statistics or numbers when possible.
 
-# Assistant:"""
-# claude_prompt = PromptTemplate(template=PROMPT_TEMPLATE, 
-#                                input_variables=["context","question"])
+Assistant:"""
+claude_prompt = PromptTemplate(template=PROMPT_TEMPLATE, 
+                               input_variables=["context","question"])
 
 
-# from langchain.chains import RetrievalQA
+from langchain.chains import RetrievalQA
 
-# qa = RetrievalQA.from_chain_type(
-#     llm=llm,
-#     chain_type="stuff",
-#     retriever=retriever,
-#     return_source_documents=True,
-#     chain_type_kwargs={"prompt": claude_prompt}
-# )
-# print("test:\n")
-# answer = qa.invoke(generator_query)
-# pp.pprint(answer)
-
-# PROMPT_TEMPLATE = """
-# Human: You are a financial advisor AI system, and provides comparison to betwen this summary and the data of other companies in the knowledge base by using fact based and statistical information when possible. 
-# Use the following pieces of information to provide a concise answer to the question enclosed in <summary> tags. 
-# If you don't know the answer, just say that you don't know, don't try to make up an answer.
-# <context>
-# {context}
-# </context>
-
-# <summary>
-# {summary}
-# </summary>
-
-# The response should be specific and use statistics or numbers when possible.
-
-# Assistant:"""
-# claude_prompt = PromptTemplate(template=PROMPT_TEMPLATE, 
-#                                input_variables=["context","summary"])
+qa = RetrievalQA.from_chain_type(
+    llm=llm,
+    chain_type="stuff",
+    retriever=retriever,
+    return_source_documents=True,
+    chain_type_kwargs={"prompt": claude_prompt}
+)
+print("test:\n")
+answer = qa.invoke(query)
+pp.pprint(answer)
