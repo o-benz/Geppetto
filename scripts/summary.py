@@ -14,7 +14,7 @@ session = boto3.Session(
     profile_name="my_profile"
 
 )
-kb_id = 'CGZ8KWKHGQ'
+kb_id = 'YDZ1OKMWRZ'
 region = "us-west-2"
 bedrock_config = Config(connect_timeout=120, read_timeout=120, retries={'max_attempts': 0})
 bedrock_client = session.client('bedrock-runtime', region_name = region)
@@ -91,14 +91,14 @@ response_body = json.loads(response.get('body').read())
 response_text = response_body.get('outputs')[0]['text']
 
 
-pp.pprint(response_text)
+#pp.pprint(response_text)
 ########################################
 from langchain_aws import ChatBedrock
 from langchain_community.retrievers import AmazonKnowledgeBasesRetriever  # Updated import
 
 llm = ChatBedrock(model_id="anthropic.claude-3-haiku-20240307-v1:0",
               client = bedrock_client)
-query = "donne moi le json du rapport de  ce document pour avoir un  tableau de chiffres: 2018-CN-Rapport-Annuel.pdf"
+query = "donne mois le Produits d’exploitation de CN   en  2023 et  2022 et compare les deux et dit mois quelle est la meilleurs années selon d'autre informations et cite les informations "
 retriever = AmazonKnowledgeBasesRetriever(
     knowledge_base_id="CGZ8KWKHGQ",
     retrieval_config={
