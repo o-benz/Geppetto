@@ -133,6 +133,7 @@ export class FeatureComponent implements OnInit {
   }
 
   analyzeData() {
-    
+    const fileName = this.file?.name || '';
+    this.router.navigate(['/dashboard', fileName]);
   }
 }

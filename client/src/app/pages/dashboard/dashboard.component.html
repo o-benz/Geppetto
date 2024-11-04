@@ -11,6 +11,72 @@
         </a>
     </header>
 
+    <div class="section">
+        <div class="visual-container">
+            <div class="visual">
+                <canvas id="chart1" width="200" height="200"></canvas>
+                <button class="pushable" (click)="exportToPNG('chart1')">
+                    <span class="shadow"></span>
+                    <span class="edge"></span>
+                    <span class="front">Export to PNG</span>
+                </button>
+            </div>
+            <div class="explanation">{{ explanations.chart1 }}</div>
+        </div>
+        <div class="visual-container">
+            <div class="explanation">{{ explanations.chart2 }}</div>
+            <div class="visual">
+                <canvas id="chart2" width="200" height="200"></canvas>
+                <button class="pushable" (click)="exportToPNG('chart2')">
+                    <span class="shadow"></span>
+                    <span class="edge"></span>
+                    <span class="front">Export to PNG</span>
+                </button>
+            </div>
+        </div>
+        <div class="visual-container">
+            <div class="visual">
+                <canvas id="chart3" width="200" height="200"></canvas>
+                <button class="pushable" (click)="exportToPNG('chart3')">
+                    <span class="shadow"></span>
+                    <span class="edge"></span>
+                    <span class="front">Export to PNG</span>
+                </button>
+            </div>
+            <div class="explanation">{{ explanations.chart3 }}</div>
+        </div>
+        <div class="visual-container">
+            <div class="explanation">{{ explanations.chart4 }}</div>
+            <div class="visual">
+                <canvas id="chart4" width="200" height="200"></canvas>
+                <button class="pushable" (click)="exportToPNG('chart4')">
+                    <span class="shadow"></span>
+                    <span class="edge"></span>
+                    <span class="front">Export to PNG</span>
+                </button>
+            </div>
+        </div>
+        <div class="visual-container">
+            <div class="visual">
+                <canvas id="chart5" width="200" height="200"></canvas>
+                <button class="pushable" (click)="exportToPNG('chart5')">
+                    <span class="shadow"></span>
+                    <span class="edge"></span>
+                    <span class="front">Export to PNG</span>
+                </button>
+            </div>
+            <div class="explanation">{{ explanations.chart5 }}</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="pushable" (click)="exportToPDF()">
+            <span class="shadow"></span>
+            <span class="edge"></span>
+            <span class="front">Export to PDF</span>
+        </button>
+    </div>
+
     <footer>
         <p>&copy; 2024 Geppetto. All rights reserved.</p>
     </footer>

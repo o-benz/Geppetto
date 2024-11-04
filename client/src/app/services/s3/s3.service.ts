@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
 import { from, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
@@ -29,5 +29,14 @@ export class S3Service {
     };
     const command = new PutObjectCommand(params);
     return from(this.s3Client.send(command));
+  }
+
+  getFile(key: string): Observable<any> {
+    const params = {
+      Bucket: this.bucketName,
+      Key: key
+    };
+    const command = new GetObjectCommand(params);
+    return from(this.s3Client.send(command).then(data => data.Body));
   }
 }
