@@ -4,6 +4,8 @@ import { S3Service } from '@app/services/s3/s3.service';
 import { FileService } from '@app/services/file/file.service';
 import { HttpClient } from '@angular/common/http';
 import { Feature } from '@app/enums/Feature';
+import { Router } from '@angular/router';
+import { ResponseService } from '@app/services/response/response.service';
 
 @Component({
   selector: 'app-feature',
@@ -13,6 +15,7 @@ import { Feature } from '@app/enums/Feature';
   imports: [CommonModule]
 })
 export class FeatureComponent implements OnInit {
+  loading: boolean = false;
   private companies: { [key: string]: { name: string, logo: string, description: string } } = {
     CN: { name: "Canadian National Railway", logo: "../../assets/CN.png", description: "The Canadian National Railway Company is a Canadian Class I freight railway headquartered in Montreal, Quebec, which serves Canada and the Midwestern and Southern United States." },
     CPKC: { name: "Canadian Pacific Kansas City", logo: "../../assets/CPKC.png", description: "Canadian Pacific Kansas City Limited, doing business as CPKC, is a Canadian railway holding company." },
@@ -36,7 +39,9 @@ export class FeatureComponent implements OnInit {
   constructor(
     private fileService: FileService,
     private s3Service: S3Service,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router,
+    private responseService: ResponseService
   ) {}
 
   private parseFileName(fileName: string): { company: string, year: string} {
@@ -51,6 +56,7 @@ export class FeatureComponent implements OnInit {
 
   private uploadAndPrompt(feature: Feature, company: string, year: string) {
     if (this.file) {
+      this.loading = true;
       this.s3Service.uploadFile(this.file).subscribe(
         () => {
           console.log('File uploaded successfully:', this.file?.name);
@@ -61,6 +67,13 @@ export class FeatureComponent implements OnInit {
           this.http.post<{ result: string }>('/api/run-model', { feature, company, year, file }).subscribe(
             response => {
               console.log('Model response:', response.result);
+              this.responseService.setResponseData(response.result);
+              const fileName = this.file?.name || '';
+              if (feature === Feature.Summarization) {
+                this.router.navigate(['/summary', fileName]);
+              } else if (feature === Feature.SentimentAnalysis) {
+                this.router.navigate(['/sentiment', fileName]);
+              }
             },
             err => console.error('Error from model:', err)
           );

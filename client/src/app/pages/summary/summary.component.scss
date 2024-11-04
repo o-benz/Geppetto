@@ -5,6 +5,10 @@
     gap: 20px;
 }
 
+.section {
+    width: 50%;
+}
+
 .ai-text {
     position: relative;
     margin-top: 10px;
@@ -17,16 +21,11 @@
     padding: 10px 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    white-space: pre;
     text-align: left;
     user-select: text;
     &::-webkit-scrollbar {
         display: none;
     }
-}
-
-.section {
-    width: 100%;
 }
 
 .loading {

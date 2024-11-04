@@ -15,18 +15,16 @@
         <div class="section">
             <h2>AI Generated Summary</h2>
             <div class="ai-text">
-                <div class="loading" *ngIf="isLoading">Loading...</div>
-                <div class="summary-content" *ngIf="!isLoading">
-                <!-- AI Generated Summary Content -->
+                <div class="summary-content">
+                    {{ responseData }}
                 </div>
             </div>
         </div>
         <div class="section">
             <h2>AI Generated Comparison</h2>
             <div class="ai-text">
-                <div class="loading" *ngIf="isLoading">Loading...</div>
-                <div class="summary-content" *ngIf="!isLoading">
-                <!-- AI Generated Summary Content -->
+                <div class="summary-content">
+                    {{ responseData }}
                 </div>
             </div>
         </div>
