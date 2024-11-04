@@ -31,8 +31,8 @@ if __name__ == '__main__':
             )
         except Exception as e:
             print(f"Error during retrieval: {e}")
-    COmp = sys.argv[1] # company name
-    retriver_query = "Give me precisely the information financial information about this company: " + COmp
+    question = sys.argv[1] # company name
+    retriver_query = "Give me precisely the information about this question: " + question
     response = retrieve(retriver_query, "POBGPV1JPA", 10)
     retrievalResults = response['retrievalResults']
 
@@ -96,7 +96,7 @@ if __name__ == '__main__':
     llm = ChatBedrock(model_id="anthropic.claude-3-haiku-20240307-v1:0",
                 client = bedrock_client)
   
-    generator_query = " Please provide accurate financial information about this company: " + COmp
+    generator_query = " Please provide accurate financial information about this question: " + question
     retriever = AmazonKnowledgeBasesRetriever(
         knowledge_base_id="POBGPV1JPA",
         retrieval_config={
@@ -119,16 +119,9 @@ if __name__ == '__main__':
     from langchain.prompts import PromptTemplate
    
     PROMPT_ETMPLATE = """
-    Human: You are an AI financial analysis assistant. Your role is to analyze and summarize financial data, providing insights on financial performance, trends, and key indicators. 
-    you can use the following information, enclosed within <context> tags, if it is relevant ,to perform a financial analysis. 
+    Human: You are an AI financial analysis assistant. Your role is to answer questions about financial data, providing insights on financial performance, trends, and key indicators. 
+    You can use the following information, enclosed within <context> tags, if you find it relevant ,to answer a financial questions. 
 
-    Respond with a concise summary that highlights:
-    
-    Key financial metrics (e.g., revenue, profit margin, growth rates) where available.
-    Important trends or changes in the data.
-    Any relevant financial risks, strengths, or areas for improvement.
-
-    Provide examples, statistics, and numerical data to support your analysis when applicable.
 
     If you dont know the company or if any specific data is unclear or missing, mention that you dont know it and don't invent anything.
 
@@ -137,7 +130,7 @@ if __name__ == '__main__':
     </context>
 
     <task>
-    Generate a concise summary, data-driven, and structured a financial analyst’s report.
+    answer the following financial questions: + {question}
     </task>
 
 
