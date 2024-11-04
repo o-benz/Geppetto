@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       expenses: [3000, 1500, 2000, 1000, 500],
       investmentCategories: ['Stocks', 'Bonds', 'Real Estate', 'Commodities', 'Cryptocurrency'],
       investments: [5000, 3000, 4000, 2000, 1000],
-      performanceMetrics: ['Metric1', 'Metric2', 'Metric3', 'Metric4', 'Metric5'],
+      performanceMetrics: ['Return on Investment', 'Net Profit Margin', 'Gross Profit Margin', 'Operating Expense Ratio', 'Current Ratio'],
       performance: [20, 30, 40, 50, 60]
     };
 
