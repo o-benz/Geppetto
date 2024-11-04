@@ -151,10 +151,8 @@ if __name__ == '__main__':
         return_source_documents=True,
         chain_type_kwargs={"prompt": claude_prompt}
     )
-    print("test:\n")
     answer = qa.invoke(generator_query)
     answer=answer['result']
     print(answer)
-   # pp.pprint(answer)
 
 

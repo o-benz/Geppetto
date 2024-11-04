@@ -1,4 +1,5 @@
 import os
+import shutil
 import subprocess
 import sys
 
@@ -22,17 +23,31 @@ def run_command_background(command, cwd=None):
     process = subprocess.Popen(command, shell=True, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return process
 
+def copy_credentials():
+    """Copy the credentials file to the .aws directory."""
+    username = input("Please enter your Windows username: ")
+    aws_dir = f"C:\\Users\\{username}\\.aws"
+    credentials_file = "credentials"
+    destination_file = os.path.join(aws_dir, "credentials")
+
+    if not os.path.exists(aws_dir):
+        os.makedirs(aws_dir)
+
+    if not os.path.exists(destination_file):
+        shutil.copy(credentials_file, destination_file)
+        print(f"Copied credentials to {destination_file}")
+    else:
+        print(f"Credentials file already exists at {destination_file}")
+
 def main():
+    # Copy credentials file
+    copy_credentials()
+
     # Check if Node.js is installed
     check_command('node')
 
     # Check if Python is installed
     check_command('python')
-
-    # Navigate to the client directory and install dependencies
-    print("Setting up client...")
-    run_command('npm ci', cwd='client')
-    client_process = run_command_background('npm start', cwd='client')
 
     # Navigate to the server directory and install dependencies
     print("Setting up server...")
@@ -42,6 +57,11 @@ def main():
     # Install Python dependencies
     print("Setting up Python environment...")
     run_command('pip install -r requirements.txt')
+
+    # Navigate to the client directory and install dependencies
+    print("Setting up client...")
+    run_command('npm ci', cwd='client')
+    client_process = run_command_background('npm start', cwd='client')
 
     print("Setup complete. Your web application should now be running.")
 
