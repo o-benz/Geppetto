@@ -16,7 +16,7 @@ if __name__ == '__main__':
     bedrock_client = session.client('bedrock-runtime', region_name = region)
     bedrock_agent_client = session.client("bedrock-agent-runtime",
                                 config=bedrock_config, region_name = region)
-    print(bedrock_client)
+   
 
     def retrieve(query, kbId, numberOfResults=10):
         try:

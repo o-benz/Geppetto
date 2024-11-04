@@ -16,7 +16,7 @@ if __name__ == '__main__':
     bedrock_client = session.client('bedrock-runtime', region_name = region)
     bedrock_agent_client = session.client("bedrock-agent-runtime",
                                 config=bedrock_config, region_name = region)
-    print(bedrock_client)
+  
 
     def retrieve(query, kbId, numberOfResults=10):
         try:
@@ -33,7 +33,7 @@ if __name__ == '__main__':
             print(f"Error during retrieval: {e}")
     COmp = sys.argv[1] # company name
     retriver_query = "Give me precisely the information financial information about this company: " + COmp
-    response = retrieve(retriver_query, "CGZ8KWKHGQ", 10)
+    response = retrieve(retriver_query, "POBGPV1JPA", 10)
     retrievalResults = response['retrievalResults']
 
     #####################################
@@ -98,7 +98,7 @@ if __name__ == '__main__':
   
     generator_query = " Please provide accurate financial information about this company: " + COmp
     retriever = AmazonKnowledgeBasesRetriever(
-        knowledge_base_id="CGZ8KWKHGQ",
+        knowledge_base_id="POBGPV1JPA",
         retrieval_config={
             "vectorSearchConfiguration": {
                 "numberOfResults": 4,
