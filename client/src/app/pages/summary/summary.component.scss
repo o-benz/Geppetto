@@ -97,8 +97,8 @@
     padding-left: 10px;
     color: white;
 }
-#messageInput:focus ~ #sendButton svg path,
-#messageInput:valid ~ #sendButton svg path {
+#messageInput:not(:disabled):focus ~ #sendButton svg path,
+#messageInput:not(:disabled):valid ~ #sendButton svg path {
     fill: #3c3c3c;
     stroke: white;
 }
@@ -121,7 +121,19 @@
 #sendButton svg path {
     transition: all 0.3s;
 }
-#sendButton:hover svg path {
+#sendButton:not(:disabled):hover svg path {
     fill: #3c3c3c;
     stroke: white;
+}
+
+input:disabled,
+button:disabled {
+  background-color: #f0f0f0;
+  color: #a0a0a0;
+  cursor: default !important;
+  border: 1px solid #d0d0d0;
+}
+
+button:disabled svg {
+  fill: #a0a0a0;
 }

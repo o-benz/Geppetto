@@ -33,31 +33,47 @@
     <div class="chatbot-section">
         <h2>Ask Follow-up Questions to Geppetto</h2>
         <div class="ai-text">
-            <div class="summary-content">
-            <!-- AI Generated Summary Content -->
+          <div class="summary-content" #logTerminal>
+            <!-- Display messages -->
+            <div *ngFor="let message of messages">
+              <p>{{ message }}</p>
+              <hr />
             </div>
+          </div>
         </div>
         <div class="chat-input">
-            <div class="messageBox">
-                <input required="" placeholder="Ask Geppetto a Question..." type="text" id="messageInput" />
-                <button id="sendButton">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
-                    <path
-                    fill="none"
-                    d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
-                    ></path>
-                    <path
-                    stroke-linejoin="round"
-                    stroke-linecap="round"
-                    stroke-width="33.67"
-                    stroke="#6c6c6c"
-                    d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
-                    ></path>
-                </svg>
-                </button>
-            </div>
+          <div class="messageBox">
+            <input
+              required
+              placeholder="Ask Geppetto a Question..."
+              type="text"
+              id="messageInput"
+              [disabled]="!chatEnabled"
+              #messageInput
+              (keydown.enter)="sendMessage(messageInput.value); messageInput.value = ''"
+            />
+            <button
+              id="sendButton"
+              [disabled]="!chatEnabled"
+              (click)="sendMessage(messageInput.value); messageInput.value = ''"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
+                <path
+                  fill="none"
+                  d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+                ></path>
+                <path
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="33.67"
+                  stroke="#6c6c6c"
+                  d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+                ></path>
+              </svg>
+            </button>
+          </div>
         </div>
-    </div>
+      </div>
 
     <footer>
     <p>&copy; 2024 Geppetto. All rights reserved.</p>

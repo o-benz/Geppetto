@@ -56,44 +56,6 @@ export class FeatureComponent implements OnInit {
     return { company, year };
   }
 
-  private uploadAndPrompt(feature: Feature, company: string, year: string) {
-    if (this.file) {
-      this.loading = true;
-      this.s3Service.uploadFile(this.file).subscribe(
-        () => {
-          console.log('File uploaded successfully:', this.file?.name);
-          let file: string = '';
-          if (this.file?.name) {
-            file = this.file?.name;
-          }
-  
-          const summaryRequest = this.http.post<{ result: string }>('/api/run-model', { feature: Feature.Summarization, company, year, file });
-          const sentimentRequest = this.http.post<{ result: string }>('/api/run-model', { feature: Feature.SentimentAnalysis, company, year, file });
-  
-          forkJoin([summaryRequest, sentimentRequest]).pipe(
-            catchError(err => {
-              console.error('Error from model:', err);
-              throw err;
-            })
-          ).subscribe(
-            ([summaryResponse, sentimentResponse]) => {
-              console.log('Summary response:', summaryResponse.result);
-              console.log('Sentiment response:', sentimentResponse.result);
-              this.responseService.setSummary(summaryResponse.result);
-              this.responseService.setSentiment(sentimentResponse.result);
-  
-              const fileName = this.file?.name || '';
-              this.router.navigate(['/summary', fileName]);
-            }
-          );
-        },
-        err => console.error('Error uploading file:', err)
-      );
-    } else {
-      console.warn('No file selected');
-    }
-  }
-
   ngOnInit() {
     this.file = this.fileService.getFile();
     if (this.file) {
@@ -133,11 +95,44 @@ export class FeatureComponent implements OnInit {
   }
 
   generateSummary() {
-    this.uploadAndPrompt(Feature.Summarization, this.company, this.year);
-    this.uploadAndPrompt(Feature.SentimentAnalysis, this.company, this.year);
+    if (this.file) {
+      this.loading = true;
+      this.s3Service.uploadFile(this.file).subscribe(
+        () => {
+          console.log('File uploaded successfully:', this.file?.name);
+          let file: string = '';
+          if (this.file?.name) {
+            file = this.file?.name;
+          }
+  
+          const summaryRequest = this.http.post<{ result: string }>('/api/run-model', { feature: Feature.Summarization, company: this.company, year: this.year, file });
+          const sentimentRequest = this.http.post<{ result: string }>('/api/run-model', { feature: Feature.SentimentAnalysis, company: this.company, year: this.year, file });
+  
+          forkJoin([summaryRequest, sentimentRequest]).pipe(
+            catchError(err => {
+              console.error('Error from model:', err);
+              throw err;
+            })
+          ).subscribe(
+            ([summaryResponse, sentimentResponse]) => {
+              console.log('Summary response:', summaryResponse.result);
+              console.log('Sentiment response:', sentimentResponse.result);
+              this.responseService.setSummary(summaryResponse.result);
+              this.responseService.setSentiment(sentimentResponse.result);
+  
+              const fileName = this.file?.name || '';
+              this.router.navigate(['/summary', fileName]);
+            }
+          );
+        },
+        err => console.error('Error uploading file:', err)
+      );
+    } else {
+      console.warn('No file selected');
+    }
   }
 
   analyzeData() {
-    this.uploadAndPrompt(Feature.DataGeneration, this.company, this.year);
+    
   }
 }
