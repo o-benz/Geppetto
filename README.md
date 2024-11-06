@@ -14,7 +14,6 @@
    - [Financial Indicator Monitoring](#financial-indicator-monitoring)
    - [Financial Trend Predictions](#financial-trend-predictions)
    - [KPI Extraction and Visualization](#kpi-extraction-and-visualization)
-   - [Multi-Report Comparisons](#multi-report-comparisons)
 5. [User Interface](#user-interface)
 6. [Tech Stack](#tech-stack)
 7. [Architecture](#architecture)
