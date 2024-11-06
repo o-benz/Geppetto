@@ -86,7 +86,7 @@ export class FeatureComponent implements OnInit {
       const { company, year } = this.parseFileName(file.name);
       this.company = company;
       this.year = year;
-      this.companyInfo = this.companies[company] || null;
+      this.companyInfo = this.companies[company] || null;this.router.navigate(['/feature', file.name]);
     }
   }
 

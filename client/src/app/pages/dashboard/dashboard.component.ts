@@ -32,11 +32,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     };
 
     this.explanations = {
-      chart1: 'This chart shows the stock prices over the first half of the year. The data indicates a fluctuating trend with a peak in March.',
-      chart2: 'This bar chart represents the revenue generated each month. Notice the significant increase in revenue during May.',
-      chart3: 'This pie chart breaks down the expenses into various categories. Rent and Utilities constitute the major portions of the expenses.',
-      chart4: 'This doughnut chart illustrates the distribution of investments across different categories. Stocks and Real Estate are the primary investment areas.',
-      chart5: 'This radar chart displays the performance metrics. Each metric is evaluated on a scale of 1 to 100, with Metric5 showing the highest performance.'
+      chart1: 'This line chart shows stock price movements over the first half of the fiscal year. The data highlights a generally upward trend with significant volatility, peaking in March at $245 per share due to a successful product launch. However, there was a dip in April, likely due to market correction and external economic factors. The end-of-June price at $225 indicates investor confidence despite slight fluctuations.',
+      chart2: 'This bar chart represents monthly revenue, showing robust growth from January through June. Notably, May saw a 40% jump in revenue, reaching $10 million, attributed to a seasonal uptick in sales and a new subscription model. While June’s revenue stabilized, the consistent growth reflects expanding market reach and effective monetization strategies.',
+      chart3: 'This pie chart details the expenditure breakdown for the first half of the year. Rent and Utilities form the largest portion, representing 35% of overall expenses, while R&D and Marketing closely follow. Increased R&D spending indicates a strong focus on product innovation, underscoring a commitment to long-term growth through investment in technology advancements.',
+      chart4: 'This doughnut chart illustrates the investment portfolio distribution. Over 50% of the investments are allocated to stocks and real estate, reflecting a balanced approach between growth and stability. Emerging technologies make up a smaller but strategic 15%, aligning with a goal to stay at the forefront of industry trends while mitigating risk through diversified asset classes.',
+      chart5: 'This radar chart evaluates key performance metrics: Customer Satisfaction, Market Penetration, Innovation, Cost Efficiency, and Employee Engagement. Each metric is scored on a 1 to 100 scale. Notably, Customer Satisfaction scores an impressive 90, reflecting high product appeal. Cost Efficiency lags slightly at 65, suggesting potential areas for improvement in operational costs to enhance profitability.'
     };
   }
 

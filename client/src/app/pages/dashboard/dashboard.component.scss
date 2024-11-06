@@ -15,6 +15,10 @@ header {
 .visual {
     width: 300px;
     height: 300px;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .explanation {
@@ -24,7 +28,7 @@ header {
 }
 
 .pushable {
-    margin-top: 10px;
+    margin-top: 20px;
     position: relative;
     background: transparent;
     padding: 0px;
@@ -112,4 +116,7 @@ header {
 .actions {
     display: flex;
     justify-content: space-around;
+    .pushable {
+        margin: 10px 0;
+    }
 }
