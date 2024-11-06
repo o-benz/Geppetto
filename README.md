@@ -19,8 +19,9 @@
 6. [Tech Stack](#tech-stack)
 7. [Architecture](#architecture)
 8. [Usage](#usage)
-9. [Contributors](#contributors)
-10. [License](#license)
+9. [Functionality](#functionality)
+10. [Contributors](#contributors)
+11. [License](#license)
 
 ## Project Overview
 Geppetto is an advanced AI-driven application designed to empower financial analysts by automating key tasks, making the analysis of financial reports faster and more insightful. Developed as part of the 2024 Polyfinance Datathon, Geppetto leverages generative AI and the AWS ecosystem to provide cutting-edge tools like automatic summarization, sentiment analysis, and real-time financial monitoring. This tool offers seamless integration with AWS services, enabling analysts to extract KPIs, visualize data, and perform comprehensive trend predictions with just a few clicks.
