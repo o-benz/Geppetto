@@ -5,27 +5,31 @@
 ## Table of Contents
 1. [Project Overview](#project-overview)
 2. [Polyfinance's 2024 Datathon](#polyfinances-2024-datathon)
-3. [Setup and Launch](#setup-and-launch)
+3. [Demo](#demo)
+4. [Setup and Launch](#setup-and-launch)
    - [Prerequisites](#prerequisites)
    - [Setup Instructions](#setup-instructions)
-4. [Features](#features)
+5. [Features](#features)
    - [Automatic Report Summarization](#automatic-report-summarization)
    - [Sentiment Analysis](#sentiment-analysis)
    - [Financial Indicator Monitoring](#financial-indicator-monitoring)
    - [Financial Trend Predictions](#financial-trend-predictions)
    - [KPI Extraction and Visualization](#kpi-extraction-and-visualization)
-5. [User Interface](#user-interface)
-6. [Tech Stack](#tech-stack)
-7. [Architecture](#architecture)
-8. [Functionality](#functionality)
-9. [Contributors](#contributors)
-10. [License](#license)
+6. [User Interface](#user-interface)
+7. [Tech Stack](#tech-stack)
+8. [Architecture](#architecture)
+9. [Functionality](#functionality)
+10. [Contributors](#contributors)
+11. [License](#license)
 
 ## Project Overview
 Geppetto is an advanced AI-driven application designed to empower financial analysts by automating key tasks, making the analysis of financial reports faster and more insightful. Developed as part of the 2024 Polyfinance Datathon, Geppetto leverages generative AI and the AWS ecosystem to provide cutting-edge tools like automatic summarization, sentiment analysis, and real-time financial monitoring. This tool offers seamless integration with AWS services, enabling analysts to extract KPIs, visualize data, and perform comprehensive trend predictions with just a few clicks.
 
 ## Polyfinance's 2024 Datathon
 The Polyfinance 2024 Datathon is a high-impact 48-hour challenge, sponsored by National Bank of Canada, focusing on innovation in financial analytics. Participants were tasked with developing a generative AI-powered tool to assist financial analysts in synthesizing and interpreting data more efficiently. Armed with AWS resources like Bedrock, Cloud9, and a wealth of financial data, the Geppetto team created a robust solution to provide real-time insights, facilitate informed decision-making, and increase the accessibility of complex financial analyses.
+
+## Demo
+[Check out the demo!](https://youtu.be/FMjPk77Ehfc?si=RiAHJJ4Tjd9_jFjz)
 
 ## Setup and Launch
 
